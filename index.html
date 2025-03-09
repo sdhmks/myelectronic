@@ -31,24 +31,10 @@
 <div id="demo" class="carousel slide" data-ride="carousel">
     
     <!-- Indicators -->
-    <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2"></li>
-    </ul>
+    <ul class="carousel-indicators" id="carousel-indicators"></ul>
 
     <!-- Slideshow -->
-    <div class="carousel-inner text-center">
-        <div class="carousel-item active">
-            <img src="https://drive.google.com/uc?export=view&id=1MeN-fwoY9uCAgqftfeRSd370hxybM3vI" class="d-block w-100" alt="Slide 1">
-        </div>
-        <div class="carousel-item">
-            <img src="https://drive.google.com/uc?export=view&id=103hXrDf9QzQnfNn0H-e_lQGX8vyBPt7x" class="d-block w-100" alt="Slide 2">
-        </div>
-        <div class="carousel-item">
-            <img src="https://drive.google.com/uc?export=view&id=13bAWh1mDn_k3ZI5FVKMa2Em5JCJm3Nvy" class="d-block w-100" alt="Slide 3">
-        </div>
-    </div>
+    <div class="carousel-inner text-center" id="carousel-inner"></div>
 
     <!-- Left and Right Controls -->
     <a class="carousel-control-prev" href="#demo" role="button" data-slide="prev">
@@ -61,9 +47,29 @@
     </a>
 </div>
 
-<!-- JavaScript to Ensure Carousel Works -->
+<!-- JavaScript to Dynamically Add Images -->
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
+        let numImages = 5; // Total images
+        let format = 'jpg'; // Change this if your images use 'png' or other formats
+        let indicatorsContainer = $("#carousel-indicators");
+        let innerContainer = $("#carousel-inner");
+
+        for (let i = 1; i <= numImages; i++) {
+            let imgSrc = `images/img${i}.${format}`;
+            
+            // Create indicator
+            let indicator = `<li data-target="#demo" data-slide-to="${i - 1}" ${i === 1 ? 'class="active"' : ''}></li>`;
+            indicatorsContainer.append(indicator);
+
+            // Create slide
+            let slide = `
+                <div class="carousel-item ${i === 1 ? 'active' : ''}">
+                    <img src="${imgSrc}" class="d-block w-100" alt="Slide ${i}" onerror="this.parentElement.remove(); document.querySelector('[data-slide-to=\'${i - 1}\']').remove();">
+                </div>`;
+            innerContainer.append(slide);
+        }
+
         $('#demo').carousel(); // Initialize Bootstrap Carousel
     });
 </script>
