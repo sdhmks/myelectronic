@@ -60,18 +60,8 @@
 </head>
 <body>
     <div class="carousel">
-        <img src="img1.jpg" class="active" alt="Image 1">
-        <img src="img2.jpg" alt="Image 2">
-        <img src="img3.jpg" alt="Image 3">
-        <img src="img4.jpg" alt="Image 4">
-        <img src="img5.jpg" alt="Image 5">
-        <div class="carousel-indicators">
-            <button class="active" onclick="showSlide(1)"></button>
-            <button onclick="showSlide(2)"></button>
-            <button onclick="showSlide(3)"></button>
-            <button onclick="showSlide(4)"></button>
-            <button onclick="showSlide(5)"></button>
-        </div>
+        <div id="imageContainer"></div>
+        <div class="carousel-indicators" id="indicatorsContainer"></div>
         <div class="carousel-controls">
             <button class="btn btn-primary" onclick="prevSlide()">Previous</button>
             <button class="btn btn-primary" onclick="nextSlide()">Next</button>
@@ -80,7 +70,24 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        let numImages = 9; // Adjust this if you add more images
         let slideIndex = 1;
+        let imageContainer = document.getElementById('imageContainer');
+        let indicatorsContainer = document.getElementById('indicatorsContainer');
+        
+        for (let i = 1; i <= numImages; i++) {
+            let img = document.createElement('img');
+            img.src = `images/img${i}.jpg`;
+            img.alt = `Image ${i}`;
+            if (i === 1) img.classList.add('active');
+            imageContainer.appendChild(img);
+            
+            let indicator = document.createElement('button');
+            if (i === 1) indicator.classList.add('active');
+            indicator.setAttribute('onclick', `showSlide(${i})`);
+            indicatorsContainer.appendChild(indicator);
+        }
+        
         function showSlide(n) {
             let slides = document.querySelectorAll('.carousel img');
             let indicators = document.querySelectorAll('.carousel-indicators button');
@@ -91,11 +98,11 @@
             slideIndex = n;
         }
         function autoSlide() {
-            slideIndex = (slideIndex % document.querySelectorAll('.carousel img').length) + 1;
+            slideIndex = (slideIndex % numImages) + 1;
             showSlide(slideIndex);
         }
         function prevSlide() {
-            slideIndex = slideIndex === 1 ? document.querySelectorAll('.carousel img').length : slideIndex - 1;
+            slideIndex = slideIndex === 1 ? numImages : slideIndex - 1;
             showSlide(slideIndex);
         }
         function nextSlide() {
