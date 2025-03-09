@@ -62,17 +62,13 @@
         document.addEventListener("DOMContentLoaded", function () {
             let carouselContainer = document.getElementById("carousel-container");
             let indicatorsContainer = document.getElementById("carousel-indicators");
-            let numImages = 9;
-            let extensions = ["jpg", "png"];
-
+            let numImages = 5;
+            
             for (let i = 1; i <= numImages; i++) {
-                extensions.forEach(ext => {
-                    let img = document.createElement("img");
-                    img.src = `images/img${i}.${ext}`;
-                    img.onerror = function() { this.style.display = 'none'; };
-                    if (i === 1 && ext === "jpg") img.classList.add("active");
-                    carouselContainer.insertBefore(img, indicatorsContainer);
-                });
+                let img = document.createElement("img");
+                img.src = `images/img${i}.jpg`;
+                if (i === 1) img.classList.add("active");
+                carouselContainer.insertBefore(img, indicatorsContainer);
                 
                 let button = document.createElement("button");
                 button.setAttribute("onclick", `showSlide(${i})`);
@@ -88,8 +84,7 @@
             slides.forEach(slide => slide.classList.remove('active'));
             indicators.forEach(indicator => indicator.classList.remove('active'));
 
-            slides[(n - 1) * 2]?.classList.add('active'); // Show JPG first if exists
-            slides[(n - 1) * 2 + 1]?.classList.add('active'); // Show PNG if JPG missing
+            slides[n - 1].classList.add('active');
             indicators[n - 1].classList.add('active');
         }
     </script>
