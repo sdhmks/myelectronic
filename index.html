@@ -63,12 +63,16 @@
             let carouselContainer = document.getElementById("carousel-container");
             let indicatorsContainer = document.getElementById("carousel-indicators");
             let numImages = 5;
-            
+            let formats = ['jpg', 'png'];
+
             for (let i = 1; i <= numImages; i++) {
-                let img = document.createElement("img");
-                img.src = `images/img${i}.jpg`;
-                if (i === 1) img.classList.add("active");
-                carouselContainer.insertBefore(img, indicatorsContainer);
+                for (let format of formats) {
+                    let img = document.createElement("img");
+                    img.src = `images/img${i}.${format}`;
+                    img.onerror = function() { this.style.display = 'none'; };
+                    if (i === 1 && format === 'jpg') img.classList.add("active");
+                    carouselContainer.insertBefore(img, indicatorsContainer);
+                }
                 
                 let button = document.createElement("button");
                 button.setAttribute("onclick", `showSlide(${i})`);
@@ -84,7 +88,7 @@
             slides.forEach(slide => slide.classList.remove('active'));
             indicators.forEach(indicator => indicator.classList.remove('active'));
 
-            slides[n - 1].classList.add('active');
+            slides[(n - 1) * 2]?.classList.add('active');
             indicators[n - 1].classList.add('active');
         }
     </script>
