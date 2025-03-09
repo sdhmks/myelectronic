@@ -54,25 +54,28 @@
     </style>
 </head>
 <body>
-    <div class="carousel">
-        <img src="images/img1.jpg" class="active"> <!-- Ganti dengan gambar pertama -->
-        <img src="images/img2.jpg" alt="Image 2"> <!-- Ganti dengan gambar kedua -->
-        <img src="images/img6.jpg"> <!-- Ganti dengan gambar ketiga -->
-        <img src="images/img4.jpg" alt="Image 4"> <!-- Ganti dengan gambar keempat -->
-        <img src="images/img9.jpg" alt="Image 5"> <!-- Ganti dengan gambar kelima -->
-
-        <div class="carousel-indicators">
-            <button class="active" onclick="showSlide(1)"></button>
-            <button onclick="showSlide(2)"></button>
-            <button onclick="showSlide(3)"></button>
-            <button onclick="showSlide(4)"></button>
-            <button onclick="showSlide(5)"></button>
-        </div>
+    <div class="carousel" id="carousel-container">
+        <div class="carousel-indicators" id="carousel-indicators"></div>
     </div>
 
     <script>
-        let currentSlide = 1;
-        showSlide(currentSlide);
+        document.addEventListener("DOMContentLoaded", function () {
+            let carouselContainer = document.getElementById("carousel-container");
+            let indicatorsContainer = document.getElementById("carousel-indicators");
+            let numImages = 5;
+            
+            for (let i = 1; i <= numImages; i++) {
+                let img = document.createElement("img");
+                img.src = `images/img${i}.jpg`;
+                if (i === 1) img.classList.add("active");
+                carouselContainer.insertBefore(img, indicatorsContainer);
+                
+                let button = document.createElement("button");
+                button.setAttribute("onclick", `showSlide(${i})`);
+                if (i === 1) button.classList.add("active");
+                indicatorsContainer.appendChild(button);
+            }
+        });
 
         function showSlide(n) {
             let slides = document.querySelectorAll('.carousel img');
@@ -81,8 +84,8 @@
             slides.forEach(slide => slide.classList.remove('active'));
             indicators.forEach(indicator => indicator.classList.remove('active'));
 
-            slides[n-1].classList.add('active');
-            indicators[n-1].classList.add('active');
+            slides[n - 1].classList.add('active');
+            indicators[n - 1].classList.add('active');
         }
     </script>
 </body>
