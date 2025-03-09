@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Carousel</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<style>
-    .carousel-inner img {
-        width: 400px;
-        height: 400px;
-        border: 3px solid black;
-        margin: auto;
-    }
-    .carousel-indicators {
-        position: absolute;
-        top: 10px;
-    }
-</style>
+    <title>Bootstrap Carousel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .carousel-inner img {
+            width: 400px;
+            height: 400px;
+            border: 3px solid black;
+            margin: auto;
+        }
+        .carousel-indicators {
+            position: absolute;
+            top: 10px;
+        }
+    </style>
 </head>
 <body class="bg-transparent">
+
 <div id="demo" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
     <ul class="carousel-indicators">
         <li data-target="#demo" data-slide-to="0" class="active"></li>
         <li data-target="#demo" data-slide-to="1"></li>
         <li data-target="#demo" data-slide-to="2"></li>
     </ul>
+
+    <!-- Slideshow -->
     <div class="carousel-inner text-center">
         <div class="carousel-item active">
             <img src="images/img1.jpg" alt="Slide 1">
@@ -39,6 +43,8 @@
             <img src="images/img3.jpg" alt="Slide 3">
         </div>
     </div>
+
+    <!-- Left and Right Controls -->
     <a class="carousel-control-prev" href="#demo" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>
     </a>
@@ -46,5 +52,6 @@
         <span class="carousel-control-next-icon"></span>
     </a>
 </div>
+
 </body>
 </html>
